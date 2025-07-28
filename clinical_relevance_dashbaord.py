@@ -32,20 +32,11 @@ if run_button and genes:
     Find known and putative drug–gene interactions for therapy mapping, clinical repurposing, and evidence synthesis.  
     **API/Automation:** ❌ (API not available for programmatic queries; web interface only)
     """)
-    dg_url = f"https://www.dgidb.org/search_results?q={'%2C'.join([urllib.parse.quote(g) for g in genes])}"
-    st.markdown(f"[🌐 Open DGIdb Results for these genes]({dg_url})")
+    st.markdown("**Explore interactions for each gene individually:**")
+    for g in genes:
+        dg_url = f"https://dgidb.org/results?searchType=gene&searchTerms={urllib.parse.quote(g)}"
+        st.markdown(f"- [{g} on DGIdb]({dg_url})")
     st.info("Use the DGIdb web search to see drug–gene records, evidence, sources, and interaction types.")
-
-    # DisGeNET
-    st.subheader("2️⃣ DisGeNET (Gene–Disease Associations)")
-    st.markdown("""
-    **Summary:**  
-    Comprehensive resource for gene–disease associations from curated and text-mined databases, including variant and disease info.  
-    **API/Automation:** ⚠️ Limited (API highly restricted; use web UI for most users)
-    """)
-    disgenet_url = "https://www.disgenet.org/search?query=" + "%20".join([urllib.parse.quote(g) for g in genes])
-    st.markdown(f"[🌐 Search DisGeNET for your genes]({disgenet_url})")
-    st.info("Explore association scores, OMIM/MeSH terms, and export disease–gene tables through the site interface.")
 
     # Open Targets Platform
     st.subheader("3️⃣ Open Targets Platform (Multi-Evidence Gene–Disease–Drug)")
